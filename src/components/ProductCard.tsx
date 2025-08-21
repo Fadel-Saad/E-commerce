@@ -1,42 +1,43 @@
 import clsx from "clsx";
+import { Link } from "react-router";
 
 function ProductCard({
-  size,
+  info = true,
   productType,
   productName,
+  slug,
   price,
   image,
+  className,
 }: {
-  size: "sm" | "lg";
-  productType: string;
-  productName: string;
-  price: string;
+  info?: boolean;
+  productType?: string;
+  productName?: string;
+  slug?: string;
+  price?: string;
   image: string;
+  className?: string;
 }) {
-  const dimensions = size === "sm" ? { w: 280, h: 288 } : { w: 366, h: 376 };
-
   return (
-    <div className="flex flex-col justify-between tracking-normal font-medium">
-      <div
-        className={clsx(
-          "border border-[#D7D7D7] w-full",
-          size === "sm" ? "max-w-[280px] max-h-[288px]" : "max-w-[366px] max-h-[376px]"
-        )}
-      >
-        <img
-          src={image}
-          alt=""
-          width={dimensions.w}
-          height={dimensions.h}
-          className="max-w-full max-h-full object-cover"
-          loading="lazy"
-        />
+    <div
+      className={clsx("flex flex-col justify-between tracking-normal font-medium w-full")}
+    >
+      <div className={clsx("border border-[#D7D7D7] w-full h-full", className)}>
+        <Link to={`/products/${slug}`} className="">
+          <img src={image} alt="" className="h-full w-full object-cover" loading="lazy" />
+        </Link>
       </div>
-      <span className="text-xs mt-3.5 text-black/66">{productType}</span>
-      <div className="flex justify-between mt-1">
-        <p className="text-sm">{productName}</p>
-        <span className="text-sm">${price}</span>
-      </div>
+      {info && (
+        <div className="mt-2.5">
+          <Link to={""} className="hover:opacity-60">
+            <span className="text-[11px] md:text-xs text-black/66">{productType}</span>
+            <div className="text-xs md:text-sm flex justify-between">
+              <p>{productName}</p>
+              <span>${price}</span>
+            </div>
+          </Link>
+        </div>
+      )}
     </div>
   );
 }

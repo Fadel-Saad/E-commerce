@@ -9,70 +9,76 @@ function Register() {
           <div className="w-full">
             <h3 className="text-[32px] font-medium mb-14 ">Get Started Now</h3>
             <fieldset className="fieldset">
-              <legend className="fieldset-legend font-medium py-1">Name</legend>
-              <label className="input-ghost validator rounded-[10px] border-1 border-black mb-6">
+              <div className="flex flex-col mb-6">
+                <label className="label font-medium py-1 text-sm text-black">Name</label>
                 <input
                   type="text"
                   required
-                  className="text-[10px] w-full p-2"
+                  className="text-[10px] w-full p-2 input-ghost validator rounded-[10px] border-1 border-black"
                   placeholder="Enter your name"
                   pattern="[A-Za-z][A-Za-z0-9\-]*"
                   minLength={3}
                   maxLength={30}
                   title="Only letters, numbers or dash"
                 />
-              </label>
-              <p className="validator-hint hidden">
-                Must be 3 to 30 characters
-                <br />
-                containing only letters, numbers or dash
-              </p>
 
-              <legend className="fieldset-legend font-medium py-1">Email address</legend>
-              <label className="input-ghost validator rounded-[10px] border-1 border-black mb-6">
+                <p className="validator-hint hidden">
+                  Must be 3 to 30 characters
+                  <br />
+                  containing only letters, numbers or dash
+                </p>
+              </div>
+
+              <div className="flex flex-col mb-6">
+                <label className="label font-medium py-1 text-sm text-black">Email</label>
                 <input
                   type="email"
                   placeholder="Enter your email"
                   required
-                  className="text-[10px] w-full p-2"
+                  className="text-[10px] w-full p-2 input-ghost validator rounded-[10px] border-1 border-black"
                 />
-              </label>
-              <div className="validator-hint hidden">Enter valid email address</div>
 
-              <legend className="fieldset-legend font-medium py-1">Password</legend>
-              <label className="input-ghost validator rounded-[10px] border-1 border-black mb-6">
+                <div className="validator-hint hidden">Enter valid email address</div>
+              </div>
+
+              <div className="flex flex-col mb-6">
+                <label className="label font-medium py-1 text-sm text-black">
+                  Password
+                </label>
                 <input
                   type="password"
                   required
-                  className="text-[10px] w-full p-2"
+                  className="text-[10px] w-full p-2 input-ghost validator rounded-[10px] border-1 border-black"
                   placeholder="Enter your password"
                   minLength={8}
                   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                   title="Must be more than 8 characters, including number, lowercase letter, uppercase letter"
                 />
-              </label>
-              <p className="validator-hint hidden">
-                Must be more than 8 characters, including
-                <br />
-                At least one number <br />
-                At least one lowercase letter <br />
-                At least one uppercase letter
-              </p>
-              <label className="label mb-7">
+
+                <p className="validator-hint hidden">
+                  Must be more than 8 characters, including
+                  <br />
+                  At least one number <br />
+                  At least one lowercase letter <br />
+                  At least one uppercase letter
+                </p>
+              </div>
+
+              <label className="label mb-7.5">
                 <input
                   type="checkbox"
-                  className="checkbox checkbox-xs rounded-xs border-black"
+                  className="checkbox checkbox-xs rounded-xs border border-black"
                 />
-                <span>
+                <span className="font-medium text-black">
                   I agree to the <u>terms and policy</u>
                 </span>
               </label>
-              <button className="btn btn-neutral mt-4 rounded-[10px]">Sign Up</button>
+              <button className="btn btn-neutral rounded-[10px]">Sign Up</button>
             </fieldset>
           </div>
           <div className="flex flex-col justify-center items-center mt-15">
             <span className="mb-6">or</span>
-            <button className="btn btn-outline btn-sm font-medium text-black rounded-[10px] mb-9 px-6">
+            <button className="btn btn-outline btn-sm border font-medium text-black rounded-[10px] mb-9 px-6">
               <svg
                 aria-label="Google logo"
                 width="16"

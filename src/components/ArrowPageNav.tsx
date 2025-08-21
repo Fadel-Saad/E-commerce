@@ -1,30 +1,15 @@
-import { Link, NavLink } from "react-router";
-import { Heart, User, ShoppingBag } from "lucide-react";
+import { Link } from "react-router";
+import { Heart, User, ShoppingBag, MoveLeft } from "lucide-react";
 
-function PageNav() {
+function ArrowPageNav() {
   return (
     <>
       {/* Desktop Nav */}
       <div className=" hidden md:flex flex-row justify-between items-center">
-        {/* Nav bar */}
-        <nav className="flex flex-row flex-1 justify-start items-center gap-8">
-          <img src="/side-bar.svg" alt="Icon" className="h-8 w-8" />
-          <ul className="flex gap-8 font-medium">
-            <li>
-              <NavLink to="/">Home</NavLink>
-            </li>
-            <li>
-              <NavLink to="/products">Collections</NavLink>
-            </li>
-            <li>
-              <NavLink to="new">New</NavLink>
-            </li>
-          </ul>
-        </nav>
-        {/* Logo */}
-        <Link to={"/"}>
-          <img src="/logo.svg" alt="Icon" className="h-[40px] w-[40px]" />
+        <Link to={"/cart"}>
+          <MoveLeft size={50} absoluteStrokeWidth />
         </Link>
+
         {/* User section */}
         <div className="flex flex-row flex-1 justify-end gap-[50px]">
           <div className="relative rounded-full bg-black w-[50px] h-[50px] opacity-85">
@@ -43,14 +28,17 @@ function PageNav() {
                   Cart
                 </span>
               </div>
-              <div className="relative rounded-full bg-black w-[50px] h-[50px] opacity-85">
+              <Link
+                to={"/cart"}
+                className="relative rounded-full bg-black w-[50px] h-[50px] opacity-85"
+              >
                 <ShoppingBag
                   width={20}
                   height={20}
                   className="absolute top-[15px] right-[15px] z-10"
                   color="white"
                 />
-              </div>
+              </Link>
             </div>
           </Link>
 
@@ -71,13 +59,15 @@ function PageNav() {
       {/* Mobile Nav*/}
       <div className="md:hidden flex flex-row justify-between items-center">
         {/* Nav bar */}
-        <nav className="flex-1 flex flex-row justify-between items-center gap-8">
-          <img src="/side-bar.svg" alt="Icon" className="h-6 w-6" />
-        </nav>
-        {/* Logo */}
-        <Link to={"/"}>
-          <img src="/logo.svg" alt="Icon" className="h-[30px] w-[30px]" />
+        <Link
+          to={"/cart"}
+          className="flex-1 flex flex-row justify-between items-center gap-8"
+        >
+          <MoveLeft size={50} absoluteStrokeWidth />
         </Link>
+
+        {/* Logo */}
+        <img src="/logo.svg" alt="Icon" className="h-[30px] w-[30px]" />
         {/* User section */}
         <div className="flex-1 flex flex-row justify-end gap-1.5">
           <Link
@@ -109,4 +99,4 @@ function PageNav() {
   );
 }
 
-export default PageNav;
+export default ArrowPageNav;

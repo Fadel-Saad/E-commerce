@@ -46,6 +46,20 @@ body {
     url("./fonts/BeatriceDeckTRIAL-Extrabold-BF64829e8ed31e6.woff") format("woff");
 }
 
+.custom-toggle-border {
+  border-width: 1px;
+  border-radius: 0;
+  min-width: 26px;
+  min-height: 26px;
+  width: 38px;
+  height: 38px;
+  cursor: pointer;
+}
+
+.custom-toggle-border:hover {
+  background-color: #d8d9d8;
+}
+
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -115,7 +129,7 @@ body {
   --sidebar-primary-foreground: oklch(0.985 0 0);
   --sidebar-accent: oklch(0.97 0 0);
   --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-border: oklch(92.191% 0.0001 271.152);
   --sidebar-ring: oklch(0.708 0 0);
 }
 
@@ -154,10 +168,4 @@ body {
 }
 
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
 }

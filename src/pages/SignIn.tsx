@@ -56,10 +56,11 @@ function SignIn() {
                   At least one uppercase letter
                 </p>
               </div>
+
               <label className="label mb-7.5">
                 <input
                   type="checkbox"
-                  className="checkbox checkbox-xs rounded-xs border-black"
+                  className="checkbox checkbox-xs rounded-xs border border-black"
                 />
                 <span className="font-medium text-black">
                   I agree to the <u>terms and policy</u>
@@ -70,7 +71,7 @@ function SignIn() {
           </div>
           <div className="flex flex-col justify-center items-center mt-15">
             <span className="mb-6">or</span>
-            <button className="btn btn-outline btn-sm font-medium text-black rounded-[10px] mb-9 px-6">
+            <button className="btn btn-outline btn-sm font-medium border text-black rounded-[10px] mb-9 px-6">
               <svg
                 aria-label="Google logo"
                 width="16"
