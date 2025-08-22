@@ -27,14 +27,17 @@ function PageNav() {
         </Link>
         {/* User section */}
         <div className="flex flex-row flex-1 justify-end gap-[50px]">
-          <div className="relative rounded-full bg-black w-[50px] h-[50px] opacity-85">
+          <Link
+            to={"#"}
+            className="relative rounded-full bg-black w-[50px] h-[50px] opacity-85"
+          >
             <Heart
               width={20}
               height={20}
               className="absolute top-[15px] right-[15px] z-10 rotate-315"
               color="white"
             />
-          </div>
+          </Link>
 
           <Link to={"/cart"}>
             <div className="flex">

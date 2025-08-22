@@ -1,25 +1,30 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { Heart, User, ShoppingBag, MoveLeft } from "lucide-react";
 
 function ArrowPageNav() {
+  const navigate = useNavigate();
+
   return (
     <>
       {/* Desktop Nav */}
       <div className=" hidden md:flex flex-row justify-between items-center">
-        <Link to={"/cart"}>
+        <button onClick={() => navigate(-1)} className="cursor-pointer">
           <MoveLeft size={50} absoluteStrokeWidth />
-        </Link>
+        </button>
 
         {/* User section */}
         <div className="flex flex-row flex-1 justify-end gap-[50px]">
-          <div className="relative rounded-full bg-black w-[50px] h-[50px] opacity-85">
+          <Link
+            to={"#"}
+            className="relative rounded-full bg-black w-[50px] h-[50px] opacity-85"
+          >
             <Heart
               width={20}
               height={20}
               className="absolute top-[15px] right-[15px] z-10 rotate-315"
               color="white"
             />
-          </div>
+          </Link>
 
           <Link to={"/cart"}>
             <div className="flex">
@@ -59,12 +64,12 @@ function ArrowPageNav() {
       {/* Mobile Nav*/}
       <div className="md:hidden flex flex-row justify-between items-center">
         {/* Nav bar */}
-        <Link
-          to={"/cart"}
-          className="flex-1 flex flex-row justify-between items-center gap-8"
+        <button
+          onClick={() => navigate(-1)}
+          className="flex-1 flex flex-row justify-between items-center gap-8 cursor-pointer"
         >
           <MoveLeft size={50} absoluteStrokeWidth />
-        </Link>
+        </button>
 
         {/* Logo */}
         <img src="/logo.svg" alt="Icon" className="h-[30px] w-[30px]" />

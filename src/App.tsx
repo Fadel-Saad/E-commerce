@@ -26,7 +26,7 @@ function App() {
           <Route path="cart" element={<Cart />} />
 
           <Route element={<CheckOut />}>
-            <Route path="information" element={<Information cartItems={[]} />} />
+            <Route path="information" element={<Information />} />
             <Route path="payment" element={<Payment />} />
             <Route path="track-your-order" element={<TrackYourOrder />} />
           </Route>

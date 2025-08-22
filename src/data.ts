@@ -70,3 +70,27 @@ export const endPageProducts = [
     image: "/images/end4.png",
   },
 ];
+
+// Mock cart data
+export const mockCartItems = [
+  {
+    id: 1,
+    name: "Full Sleeve Zipper",
+    category: "Cotton T Shirt",
+    price: 99,
+    size: "L",
+    color: "Black",
+    image: "/images/products1.png",
+    quantity: 1,
+  },
+  {
+    id: 2,
+    name: "Basic Slim Fit T-Shirt",
+    category: "Cotton T Shirt",
+    price: 99,
+    size: "L",
+    color: "Black",
+    image: "/images/products2.png",
+    quantity: 1,
+  },
+];

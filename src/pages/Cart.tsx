@@ -2,30 +2,7 @@ import PageNav from "@/components/PageNav";
 import { useState } from "react";
 import { X, Heart, Plus, Minus } from "lucide-react";
 import { Link } from "react-router";
-
-// Mock cart data
-const mockCartItems = [
-  {
-    id: 1,
-    name: "Full Sleeve Zipper",
-    category: "Cotton T Shirt",
-    price: 99,
-    size: "L",
-    color: "Black",
-    image: "/images/products1.png",
-    quantity: 1,
-  },
-  {
-    id: 2,
-    name: "Basic Slim Fit T-Shirt",
-    category: "Cotton T Shirt",
-    price: 99,
-    size: "L",
-    color: "Black",
-    image: "/images/products2.png",
-    quantity: 1,
-  },
-];
+import { mockCartItems } from "@/data";
 
 function Cart() {
   const [cartItems, setCartItems] = useState(mockCartItems);
@@ -87,10 +64,10 @@ function Cart() {
               {cartItems.map((item) => (
                 <div
                   key={item.id}
-                  className=" border border-[#D9D9D9] rounded-lg p-6 relative"
+                  className=" border border-[#D9D9D9] rounded-lg p-4 relative"
                 >
                   {/* Remove and Favorite buttons */}
-                  <div className="absolute top-4 right-4 flex gap-2">
+                  <div className="hidden lg:flex absolute top-4 right-4 gap-2">
                     <button
                       className="p-1 hover:bg-gray-100 rounded"
                       onClick={() => removeItem(item.id)}
@@ -119,10 +96,10 @@ function Cart() {
                           {item.category}
                         </p>
                         <h3 className="text-sm font-medium mb-2">{item.name}</h3>
-                        <p className="text-sm font-medium mb-4">${item.price}</p>
+                        <p className="text-sm font-medium mb-2 lg:mb-4">${item.price}</p>
 
                         {/* Size and Color */}
-                        <div className="flex gap-4 text-xs text-gray-600 mb-4">
+                        <div className="flex justify-between gap-1 text-xs text-gray-600 mb-2 lg:mb-4">
                           <span>Size: {item.size}</span>
                           <span>Color: {item.color}</span>
                         </div>

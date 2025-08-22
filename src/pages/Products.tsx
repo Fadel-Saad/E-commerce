@@ -81,7 +81,7 @@ function Products() {
             w-1/2  overflow-y-auto
           `}
           >
-            <div className="p-5">
+            <div className="px-5 py-3">
               <ProductFilters
                 isFiltersOpen={isFiltersOpen}
                 setIsFiltersOpen={setIsFiltersOpen}
@@ -117,9 +117,7 @@ function Products() {
                 </NavLink>
               </div>
 
-              <div className="w-full flex justify-between items-center mb-5">
-                <h3 className="text-xl font-['Beatrice_Deck_Trial_Bold']">PRODUCTS</h3>
-              </div>
+              <h3 className="text-xl mb-5 font-['Beatrice_Deck_Trial_Bold']">PRODUCTS</h3>
 
               <SearchBar className="w-full" />
 
@@ -127,7 +125,7 @@ function Products() {
               <div
                 className={`
              transition-all duration-300 ease-in-out
-            ${isFiltersOpen ? "ml-[50%]" : "ml-0 w-full overflow-x-scroll"}
+            ${isFiltersOpen ? "ml-[50%] mt-5" : "ml-0 w-full overflow-x-scroll"}
           `}
               >
                 {!isFiltersOpen && (
@@ -156,7 +154,11 @@ function Products() {
                 </div>
 
                 {/* Product grid */}
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-5 w-full">
+                <div
+                  className={`grid gap-5 w-full ${
+                    isFiltersOpen ? "grid-cols-1" : "grid-cols-2 md:grid-cols-3"
+                  }`}
+                >
                   {products.map((product, i) => (
                     <ProductCard
                       key={i}

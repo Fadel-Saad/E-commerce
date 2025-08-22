@@ -1,24 +1,14 @@
 import CountryPicker from "@/components/CountryPicker";
 import { MoveRight } from "lucide-react";
+import { mockCartItems } from "@/data";
+import { Link } from "react-router";
 
-interface CartItem {
-  id: number;
-  name: string;
-  category: string;
-  price: number;
-  size: string;
-  color: string;
-  image: string;
-  quantity: number;
-}
-
-interface InformationProps {
-  cartItems: CartItem[];
-}
-
-function Information({ cartItems }: InformationProps) {
+function Information() {
   // Calculate totals from cartItems
-  const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const subtotal = mockCartItems.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
   const delivery = 10; // Fixed delivery cost
   const total = subtotal + delivery;
 
@@ -175,17 +165,19 @@ function Information({ cartItems }: InformationProps) {
               </div>
             </div>
             <div className="flex justify-end">
-              <button className="btn rounded-none bg-[#D9D9D9] border-[#D9D9D9] w-full lg:w-1/2 flex justify-between font-medium text-sm">
-                Payment
-                <MoveRight size={35} absoluteStrokeWidth />
-              </button>
+              <Link to={"/payment"} className="w-full lg:w-1/2">
+                <button className="btn rounded-none bg-[#D9D9D9] border-[#D9D9D9]  flex w-full justify-between font-medium text-sm">
+                  Payment
+                  <MoveRight size={35} absoluteStrokeWidth />
+                </button>
+              </Link>
             </div>
           </fieldset>
         </div>
 
         {/* Right Side - Order */}
         <div className="lg:w-102">
-          <div className="border border-[#D9D9D9] px-8 py-10 sticky top-8">
+          <div className="border border-[#D9D9D9] px-5 py-9 sticky top-8">
             <div className="flex justify-between">
               <h2 className="text-sm font-medium uppercase tracking-[1px] mb-6">
                 your order
@@ -193,56 +185,38 @@ function Information({ cartItems }: InformationProps) {
               <span>(2)</span>
             </div>
 
-            <div className="">
-              <div className="space-y-6">
-                {cartItems.map((item) => (
-                  <div
-                    key={item.id}
-                    className=" border border-[#D9D9D9] rounded-lg p-6 relative"
-                  >
-                    {/* Remove and Favorite buttons */}
-                    <div className="absolute top-4 right-4 flex gap-2">
-                      <button className="p-1 hover:bg-gray-100 rounded">x</button>
-                      <button className="p-1 hover:bg-gray-100 rounded">heart</button>
+            <div className="space-y-6 mb-8 tracking-normal">
+              {mockCartItems.map((item) => (
+                <div key={item.id} className="relative">
+                  <div className="flex gap-6">
+                    {/* Product Image */}
+                    <div className="w-32 h-40 border border-[#D9D9D9] overflow-hidden flex-shrink-0">
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className="w-full h-full object-cover"
+                      />
                     </div>
 
-                    <div className="flex gap-6">
-                      {/* Product Image */}
-                      <div className="w-32 h-40 border border-[#D9D9D9] overflow-hidden flex-shrink-0">
-                        <img
-                          src={item.image}
-                          alt={item.name}
-                          className="w-full h-full object-cover"
-                        />
+                    {/* Product Details */}
+                    <div className="flex-1 flex flex-col justify-between text-xs">
+                      <div>
+                        <div className="flex justify-between font-medium gap-1 mb-3">
+                          <span>{item.name}</span>
+                          <span className="underline self-start">Change</span>
+                        </div>
+                        <span className="opacity-65 font-medium">
+                          {item.color}/{item.size}
+                        </span>
                       </div>
-
-                      {/* Product Details */}
-                      <div className="flex-1 flex flex-col justify-between">
-                        <div>
-                          <p className="text-xs text-gray-500 uppercase mb-1">
-                            {item.category}
-                          </p>
-                          <h3 className="text-sm font-medium mb-2">{item.name}</h3>
-                          <p className="text-sm font-medium mb-4">${item.price}</p>
-
-                          {/* Size and Color */}
-                          <div className="flex gap-4 text-xs text-gray-600 mb-4">
-                            <span>Size: {item.size}</span>
-                            <span>Color: {item.color}</span>
-                          </div>
-                        </div>
-
-                        {/* Quantity Controls */}
-                        <div className="flex items-center gap-3">
-                          <span className="w-8 text-center text-sm font-medium">
-                            {item.quantity}
-                          </span>
-                        </div>
+                      <div className="flex justify-between items-center font-medium">
+                        <span>{item.quantity}</span>
+                        <span>${item.price}</span>
                       </div>
                     </div>
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
 
             <div className="border-t border-gray-200 py-4 space-y-4 tracking-[1px]">

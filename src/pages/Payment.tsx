@@ -14,19 +14,17 @@ function Payment() {
   const [isTermsAccepted, setIsTermsAccepted] = useState(false);
 
   return (
-    <div className="max-w-7xl flex flex-col w-full py-7 px-4.5 md:p-[50px] mx-auto min-h-screen">
+    <div className="flex-1 py-10 mt-3">
       <div className="flex flex-col lg:flex-row gap-8">
         {/* Left Side - Payment Method Selection */}
-        <div className="flex-1 lg:flex-[2]">
+        <div className="flex-1 lg:flex-[2] border border-[#D9D9D9] p-6 lg:p-8">
           <div className="max-w-lg">
             {/* Header */}
-            <div className="mb-8">
-              <h1 className="text-xl font-medium tracking-[1px] mb-2">
-                SELECT PAYMENT METHOD
-              </h1>
-              <p className="text-sm text-gray-600 tracking-normal">
+            <div className="mb-8 tracking-normal">
+              <h1 className="text-[28px] font-medium mb-5">SELECT PAYMENT METHOD</h1>
+              <p className="text-[10px]">
                 WANT TO PAY WITH CASH ON DELIVERY?{" "}
-                <span className="font-medium">VERIFY YOUR ID</span>
+                <span className="font-medium underline opacity-60">VERIFY YOUR ID</span>
               </p>
             </div>
 
@@ -34,7 +32,7 @@ function Payment() {
             <div className="space-y-4 mb-8">
               {/* Cash on Delivery Option */}
               <label className="block">
-                <div className="border border-[#D9D9D9] p-6 cursor-pointer hover:bg-gray-50 transition-colors">
+                <div className="border border-[#D9D9D9] rounded-[12px] p-4 lg:p-6 cursor-pointer hover:bg-gray-50 transition-colors">
                   <div className="flex items-center gap-4">
                     <input
                       type="radio"
@@ -45,16 +43,14 @@ function Payment() {
                       className="w-4 h-4 text-black focus:ring-black"
                     />
 
-                    <div className="w-8 h-8 bg-gray-200 rounded flex items-center justify-center">
-                      {/* cash SVG */}
+                    <div className="w-8 h-6 bg-gray-200 rounded flex items-center justify-center">
+                      <img src="/cash.svg" alt="WHISH Logo" className="w-8 h-6" />
                     </div>
 
                     <div className="flex-1">
-                      <div className="flex items-center gap-2">
-                        <span className="font-medium text-sm tracking-[1px]">
-                          CASH ON DELIVERY
-                        </span>
-                        <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">
+                      <div className="flex items-center gap-2 tracking-normal">
+                        <span className="font-medium text-lg">CASH ON DELIVERY</span>
+                        <span className="text-[7px] lg:text-[8px] text-gray-500 border px-2 py-1 rounded-4xl">
                           VERIFIED USERS ONLY
                         </span>
                       </div>
@@ -68,7 +64,7 @@ function Payment() {
 
               {/* WHISH Payment Option */}
               <label className="block">
-                <div className="border border-[#D9D9D9] p-6 cursor-pointer hover:bg-gray-50 transition-colors">
+                <div className="border border-[#D9D9D9] rounded-[12px] p-6 cursor-pointer hover:bg-gray-50 transition-colors">
                   <div className="flex items-center gap-4">
                     <input
                       type="radio"
@@ -79,12 +75,12 @@ function Payment() {
                       className="w-4 h-4 text-black focus:ring-black"
                     />
 
-                    <div className="w-8 h-8 bg-red-500 rounded flex items-center justify-center">
-                      {/* whish SVG */}
+                    <div className="w-8 h-6 bg-red-500 rounded flex items-center justify-center">
+                      <img src="/whish.svg" alt="WHISH Logo" className="w-8 h-6" />
                     </div>
 
                     <div className="flex-1">
-                      <span className="font-medium text-sm tracking-[1px]">WHISH</span>
+                      <span className="font-medium text-lg tracking-[1px]">WHISH</span>
                       <p className="text-xs text-gray-600 mt-1 tracking-normal">
                         PAY USING WHISH
                       </p>
@@ -140,7 +136,7 @@ function Payment() {
             >
               <button
                 className="w-full bg-gray-200 hover:bg-gray-300 text-black font-medium py-3 px-6 transition-colors text-sm uppercase tracking-wide cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
-                disabled={!selectedPayment || !isTermsAccepted}
+                // disabled={!selectedPayment || !isTermsAccepted}
               >
                 CONFIRM PAYMENT
               </button>
@@ -148,11 +144,11 @@ function Payment() {
           </div>
 
           {/* Info Message */}
-          <div className="flex items-start gap-3 p-4  border border-[#D9D9D9] rounded">
+          <div className="flex items-center gap-3 p-3 border border-[#D9D9D9] rounded">
             <div className="w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
               <span className="text-white text-xs font-bold">i</span>
             </div>
-            <p className="text-[10px] text-gray-700 leading-relaxed">
+            <p className="text-[10px] text-center text-gray-700 tracking-normal leading-relaxed">
               YOUR ORDER WILL BE PROCESSED ONCE PAYMENT IS COMPLETE. THANK YOU FOR
               SHOPPING WITH US
             </p>

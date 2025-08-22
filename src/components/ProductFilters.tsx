@@ -8,7 +8,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-import { ChevronRight } from "lucide-react";
+import { ChevronLeft } from "lucide-react";
 
 function ProductFilters({
   isFiltersOpen,
@@ -21,11 +21,11 @@ function ProductFilters({
     <div className="w-full p-0 lg:pt-17">
       <button
         onClick={() => setIsFiltersOpen?.((isFiltersOpen) => !isFiltersOpen)}
-        className="font-['Beatrice_Deck_Trial_Bold'] mb-5 cursor-pointer lg:cursor-default w-fit"
+        className="font-['Beatrice_Deck_Trial_Bold'] mb-5 cursor-pointer lg:cursor-default w-full"
       >
-        <div className="flex items-center gap-0.5">
+        <div className="flex justify-between items-center gap-0.5">
           <span>Filters</span>
-          <ChevronRight className="lg:hidden" size={18} />
+          <ChevronLeft className="lg:hidden" size={18} />
         </div>
       </button>
 
@@ -33,7 +33,7 @@ function ProductFilters({
       <div className="w-full pb-6 border-b border-dashed border-[#C9C9C9]">
         <h4 className="font-['Beatrice_Deck_Trial_Bold'] text-sm mb-2">Size</h4>
 
-        <ToggleGroup className="w-full gap-1" type="multiple" variant="outline">
+        <ToggleGroup className="w-full gap-1 flex-wrap" type="multiple" variant="outline">
           <ToggleGroupItem className="border-[#A3A3A3] custom-toggle-border" value="xs">
             XS
           </ToggleGroupItem>
