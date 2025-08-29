@@ -22,7 +22,7 @@ function ProductCard({
     <div
       className={clsx("flex flex-col justify-between tracking-normal font-medium w-full")}
     >
-      <div className={clsx("border border-[#D7D7D7] w-full h-full", className)}>
+      <div className={clsx("border border-[#D7D7D7] h-full", className)}>
         <Link to={`/products/${slug}`} className="">
           <img src={image} alt="" className="h-full w-full object-cover" loading="lazy" />
         </Link>

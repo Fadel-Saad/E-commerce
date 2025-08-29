@@ -136,7 +136,7 @@ function Payment() {
             >
               <button
                 className="w-full bg-gray-200 hover:bg-gray-300 text-black font-medium py-3 px-6 transition-colors text-sm uppercase tracking-wide cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
-                // disabled={!selectedPayment || !isTermsAccepted}
+                disabled={!selectedPayment || !isTermsAccepted}
               >
                 CONFIRM PAYMENT
               </button>

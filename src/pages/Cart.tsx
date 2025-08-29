@@ -7,6 +7,7 @@ import { mockCartItems } from "@/data";
 function Cart() {
   const [cartItems, setCartItems] = useState(mockCartItems);
   const [activeTab, setActiveTab] = useState("SHOPPING BAG");
+  const [isTermsAccepted, setIsTermsAccepted] = useState(false);
 
   const updateQuantity = (id: number, change: number) => {
     setCartItems((items) =>
@@ -57,6 +58,17 @@ function Cart() {
           </button>
         </div>
 
+        {/* Empty Cart */}
+        {cartItems.length === 0 && (
+          <div className="text-center py-12 text-gray-500">
+            <p className="text-4xl mb-12">Your shopping bag is empty</p>
+            <Link to="/" className="btn btn-neutral">
+              Go Back to Shop
+            </Link>
+          </div>
+        )}
+
+        {/* Cart with Items */}
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Left Side - Cart Items */}
           <div className="flex-1 lg:flex-[2]">
@@ -129,65 +141,63 @@ function Cart() {
                   </div>
                 </div>
               ))}
-
-              {cartItems.length === 0 && (
-                <div className="text-center py-12 text-gray-500">
-                  Your shopping bag is empty
-                </div>
-              )}
             </div>
           </div>
 
           {/* Right Side - Order Summary */}
-          <div className="lg:w-80">
-            <div className="border border-[#D9D9D9] px-8 py-10 sticky top-8">
-              <h2 className="text-sm font-medium uppercase tracking-[1px] mb-6">
-                ORDER SUMMARY
-              </h2>
-              <div className="space-y-4 mb-6 tracking-[1px]">
-                <div className="flex justify-between font-medium text-xs">
-                  <span>Subtotal</span>
-                  <span>${subtotal}</span>
+          {cartItems.length > 0 && (
+            <div className="lg:w-80">
+              <div className="border border-[#D9D9D9] px-8 py-10 sticky top-8">
+                <h2 className="text-sm font-medium uppercase tracking-[1px] mb-6">
+                  ORDER SUMMARY
+                </h2>
+                <div className="space-y-4 mb-6 tracking-[1px]">
+                  <div className="flex justify-between font-medium text-xs">
+                    <span>Subtotal</span>
+                    <span>${subtotal}</span>
+                  </div>
+                  <div className="flex justify-between font-medium text-xs">
+                    <span>Delivery</span>
+                    <span>${delivery}</span>
+                  </div>
                 </div>
-                <div className="flex justify-between font-medium text-xs">
-                  <span>Delivery</span>
-                  <span>${delivery}</span>
-                </div>
-              </div>
 
-              <div className="border-t border-gray-200 pt-4 mb-6 tracking-[1px]">
-                <div className="flex justify-between font-medium">
-                  <span>
-                    TOTAL <span className="text-xs opacity-55">(TAX INCL.)</span>
+                <div className="border-t border-gray-200 pt-4 mb-6 tracking-[1px]">
+                  <div className="flex justify-between font-medium">
+                    <span>
+                      TOTAL <span className="text-xs opacity-55">(TAX INCL.)</span>
+                    </span>
+                    <span>${total}</span>
+                  </div>
+                </div>
+
+                {/* Terms and Conditions */}
+                <label className="flex items-center gap-3 mb-6 text-xs text-gray-600">
+                  <input
+                    type="checkbox"
+                    checked={isTermsAccepted}
+                    onChange={(e) => setIsTermsAccepted(e.target.checked)}
+                    id="checkbox"
+                    className="w-4 h-4 rounded border-gray-300"
+                  />
+                  <span className="tracking-normal">
+                    I agree to the Terms and Conditions
                   </span>
-                  <span>${total}</span>
-                </div>
+                </label>
+
+                {/* Continue Button */}
+
+                <Link to="/information" state={{ cartItems }}>
+                  <button
+                    className="w-full bg-gray-200 hover:bg-gray-300 text-black font-medium py-3 px-6 transition-colors text-sm uppercase tracking-wide cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                    disabled={cartItems.length === 0 || !isTermsAccepted}
+                  >
+                    CONTINUE
+                  </button>
+                </Link>
               </div>
-
-              {/* Terms and Conditions */}
-              <label className="flex items-center gap-3 mb-6 text-xs text-gray-600">
-                <input
-                  type="checkbox"
-                  id="checkbox"
-                  className="w-4 h-4 rounded border-gray-300"
-                />
-                <span className="tracking-normal">
-                  I agree to the Terms and Conditions
-                </span>
-              </label>
-
-              {/* Continue Button */}
-
-              <Link to="/information" state={{ cartItems }}>
-                <button
-                  className="w-full bg-gray-200 hover:bg-gray-300 text-black font-medium py-3 px-6 transition-colors text-sm uppercase tracking-wide cursor-pointer"
-                  disabled={cartItems.length === 0}
-                >
-                  CONTINUE
-                </button>
-              </Link>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </div>

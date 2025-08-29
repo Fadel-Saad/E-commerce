@@ -3,10 +3,57 @@ import PageNav from "../components/PageNav";
 import ProductCard from "../components/ProductCard";
 import { ChevronDown, ChevronLeft, ChevronRight, MoveRight } from "lucide-react";
 import { Link } from "react-router";
-import { endPageProducts } from "@/data";
+import { endPageProducts, xivProducts, newProducts } from "@/data";
 import Footer from "@/components/Footer";
+import { useState, useRef } from "react";
 
 function HomePage() {
+  // State to manage the number of visible products in XIV collection section
+  const [visibleProductsCount, setVisibleProductsCount] = useState(3);
+  const [selectedCategory, setSelectedCategory] = useState("ALL");
+
+  const handleShowMore = () => {
+    setVisibleProductsCount((prev) => Math.min(prev + 3, filteredProducts.length));
+  };
+
+  const handleCategoryChange = (category: string) => {
+    setSelectedCategory(category);
+    setVisibleProductsCount(3); // Reset to show only 3 products when category changes
+  };
+
+  // Ref for the scrollable container in "New This Week" section
+  const newProductsScrollRef = useRef<HTMLDivElement>(null);
+
+  // Scroll functions for "New This Week" section
+  const scrollLeft = () => {
+    if (newProductsScrollRef.current) {
+      newProductsScrollRef.current.scrollBy({
+        left: -300, // Scroll by approximately one product card width
+        behavior: "smooth",
+      });
+    }
+  };
+
+  const scrollRight = () => {
+    if (newProductsScrollRef.current) {
+      newProductsScrollRef.current.scrollBy({
+        left: 300, // Scroll by approximately one product card width
+        behavior: "smooth",
+      });
+    }
+  };
+
+  // Filter products based on selected category
+  const filteredProducts =
+    selectedCategory === "ALL"
+      ? xivProducts
+      : xivProducts.filter(
+          (product) => product.category.toLowerCase() === selectedCategory.toLowerCase()
+        );
+
+  const displayedProducts = filteredProducts.slice(0, visibleProductsCount);
+  const hasMoreProducts = visibleProductsCount < filteredProducts.length;
+
   return (
     <>
       <div className="max-w-7xl w-full p-5 md:p-[50px] mx-auto">
@@ -115,6 +162,7 @@ function HomePage() {
           </Link>
         </section>
 
+        {/* New This Week */}
         <section className="mb-[150px]">
           <div className="flex justify-between mb-[30px]">
             <h2 className="text-5xl font-['Beatrice_Deck_Trial_Extrabold']">
@@ -125,41 +173,36 @@ function HomePage() {
               See All
             </Link>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-5 mb-7">
-            <ProductCard
-              productType={"V-Neck T-Shirt"}
-              productName={"Embroidered Seersucker Shirt"}
-              price={"99"}
-              image={"/images/new1.png"}
-              className="max-w-[280px] max-h-[200px] md:max-h-[288px]"
-            />
-            <ProductCard
-              productType={"Cotton T Shirt"}
-              productName={"Basic Slim Fit T-Shirt"}
-              price={"99"}
-              image={"/images/new2.png"}
-              className="max-w-[280px] max-h-[200px] md:max-h-[288px]"
-            />
-            <ProductCard
-              productType={"Henley T-Shirt"}
-              productName={"Blurred Print T-Shirt"}
-              price={"99"}
-              image={"/images/new3.png"}
-              className="max-w-[280px] max-h-[200px] md:max-h-[288px]"
-            />
-            <ProductCard
-              productType={"Crewneck T-Shirt"}
-              productName={"Full Sleeve Zipper"}
-              price={"99"}
-              image={"/images/new4.png"}
-              className="max-w-[280px] max-h-[200px] md:max-h-[288px]"
-            />
+          <div
+            ref={newProductsScrollRef}
+            className="flex overflow-x-auto gap-5 mb-7 scrollbar-hide mx-auto max-w-[580px] md:max-w-[1180px]"
+            style={{
+              scrollbarWidth: "none",
+              msOverflowStyle: "none",
+            }}
+          >
+            {newProducts.map((product, index) => (
+              <ProductCard
+                key={`${product.name}-${index}`}
+                productType={product.type}
+                productName={product.name}
+                price={product.price}
+                image={product.image}
+                className="flex-shrink-0 w-[200px] md:w-[280px] max-h-[200px] md:max-h-[288px] md:h-[288px]"
+              />
+            ))}
           </div>
           <div className="flex justify-center gap-3">
-            <button className="btn w-10 h-10 p-0 border rounded-none border-[#A3A3A3]">
+            <button
+              onClick={scrollLeft}
+              className="btn w-10 h-10 p-0 border rounded-none border-[#A3A3A3] hover:bg-gray-100 transition-colors"
+            >
               <ChevronLeft />
             </button>
-            <button className="btn w-10 h-10 p-0 border rounded-none border-[#A3A3A3]">
+            <button
+              onClick={scrollRight}
+              className="btn w-10 h-10 p-0 border rounded-none border-[#A3A3A3] hover:bg-gray-100 transition-colors"
+            >
               <ChevronRight />
             </button>
           </div>
@@ -172,45 +215,67 @@ function HomePage() {
           {/* Collection Category */}
           <div className="flex justify-between border-b border-[#DFDFDF] mb-10">
             <div className="flex justify-between tracking-normal pb-3 gap-8 ">
-              <span>(ALL)</span>
-              <span className="text-[#8A8A8A]">Men</span>
-              <span className="text-[#8A8A8A]">Women</span>
-              <span className="text-[#8A8A8A]">Kid</span>
+              <button
+                onClick={() => handleCategoryChange("ALL")}
+                className={`bg-transparent border-none cursor-pointer ${
+                  selectedCategory === "ALL" ? "text-black" : "text-[#8A8A8A]"
+                }`}
+              >
+                (ALL)
+              </button>
+              <button
+                onClick={() => handleCategoryChange("men")}
+                className={`bg-transparent border-none cursor-pointer ${
+                  selectedCategory === "men" ? "text-black" : "text-[#8A8A8A]"
+                }`}
+              >
+                Men
+              </button>
+              <button
+                onClick={() => handleCategoryChange("women")}
+                className={`bg-transparent border-none cursor-pointer ${
+                  selectedCategory === "women" ? "text-black" : "text-[#8A8A8A]"
+                }`}
+              >
+                Women
+              </button>
+              <button
+                onClick={() => handleCategoryChange("kids")}
+                className={`bg-transparent border-none cursor-pointer ${
+                  selectedCategory === "kids" ? "text-black" : "text-[#8A8A8A]"
+                }`}
+              >
+                Kid
+              </button>
             </div>
-            <div>
+            <div className="hidden">
               <span>Filters</span>
               <span>Sorts</span>
             </div>
           </div>
           <div className="grid grid-cols-3 gap-4 md:gap-10 mb-7">
-            <ProductCard
-              productType={"Cotton T Shirt"}
-              productName={"Basic Heavy Weight T-shirt"}
-              price={"199"}
-              image={"/images/xiv1.png"}
-              className="max-w-[366px] max-h-[376px]"
-            />
-            <ProductCard
-              productType={"Cotton  jeans "}
-              productName={"Soft Wash straight Fit Jeans"}
-              price={"199"}
-              image={"/images/xiv2.png"}
-              className="max-w-[366px] max-h-[376px]"
-            />
-            <ProductCard
-              productType={"Cotton T Shirt"}
-              productName={"Basic Heavy Weight T-shirt"}
-              price={"199"}
-              image={"/images/xiv3.png"}
-              className="max-w-[366px] max-h-[376px]"
-            />
+            {displayedProducts.map((product, index) => (
+              <ProductCard
+                key={`${product.name}-${index}`}
+                productType={product.type}
+                productName={product.name}
+                price={product.price}
+                image={product.image}
+                className="max-w-[366px] max-h-[376px]"
+              />
+            ))}
           </div>
-          <div className="flex flex-col justify-center items-center">
-            <Link className="flex flex-col items-center" to={"/products"}>
-              <span className="text-[#8A8A8A]">More</span>
-              <ChevronDown />
-            </Link>
-          </div>
+          {hasMoreProducts && (
+            <div className="flex flex-col justify-center items-center">
+              <button
+                onClick={handleShowMore}
+                className="flex flex-col items-center bg-transparent border-none cursor-pointer"
+              >
+                <span className="text-[#8A8A8A]">More</span>
+                <ChevronDown />
+              </button>
+            </div>
+          )}
         </section>
         <section className="flex flex-col justify-center items-center mb-20 md:mb-37">
           <h2 className="text-center text-5xl mb-4 font-['Beatrice_Deck_Trial_Regular'] uppercase">

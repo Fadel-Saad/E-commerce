@@ -171,3 +171,16 @@ body {
 
 @layer base {
 }
+
+/* Hide scrollbar for horizontal scroll containers */
+.scrollbar-hide {
+  /* Firefox */
+  scrollbar-width: none;
+  /* Internet Explorer 10+ */
+  -ms-overflow-style: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  /* WebKit */
+  display: none;
+}
