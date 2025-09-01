@@ -33,17 +33,14 @@ function ArrowPageNav() {
                   Cart
                 </span>
               </div>
-              <Link
-                to={"/cart"}
-                className="relative rounded-full bg-black w-[50px] h-[50px] opacity-85"
-              >
+              <div className="relative rounded-full bg-black w-[50px] h-[50px] opacity-85">
                 <ShoppingBag
                   width={20}
                   height={20}
                   className="absolute top-[15px] right-[15px] z-10"
                   color="white"
                 />
-              </Link>
+              </div>
             </div>
           </Link>
 
